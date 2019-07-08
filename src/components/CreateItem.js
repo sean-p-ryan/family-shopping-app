@@ -19,49 +19,57 @@ export default class CreateTodo extends Component {
             max_budget: undefined
         };
 
-        const itemNameAdded = (e) => {
-            this.setState({
-                item_name: e.target.value
-            });
-        }
+        this.itemNameAdded = this.itemNameAdded.bind(this);
+        this.maxBudgetAdded = this.maxBudgetAdded.bind(this);
+        this.itemOwnerAdded = this.itemOwnerAdded.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
 
-        const maxBudgetAdded = (e) => {
-            this.setState({
-                max_budget: e.target.value
-            })
-        };
+    itemNameAdded = (e) => {
+        this.setState({
+            item_name: e.target.value
+        });
+    }
 
-        const itemOwnerAdded = (e) => {
-            this.setState({
-                item_owner: e.target.value
-            });
-        };
+    maxBudgetAdded = (e) => {
+        this.setState({
+            max_budget: e.target.value
+        })
+    };
 
-        const onSubmit = e => {
-            e.preventDefault();
+    itemOwnerAdded = (e) => {
+        this.setState({
+            item_owner: e.target.value
+        });
+    };
 
-            console.log(`Form submitted`);
-            console.log(`Item name: ${this.state.item_name}`);
-            console.log(`Item owner: ${this.state.item_owner}`);
-            console.log(`Max budget: ${this.state.max_budget}`)
+    onSubmit = e => {
+        e.preventDefault();
 
-            this.setState({
-                item_name: '',
-                item_owner: '',
-                max_budget: undefined
-            })
+        console.log(`Form submitted`);
+        console.log(`Item name: ${this.state.item_name}`);
+        console.log(`Item owner: ${this.state.item_owner}`);
+        console.log(`Max budget: ${this.state.max_budget}`)
 
-        }
+        this.setState({
+            item_name: '',
+            item_owner: '',
+            max_budget: undefined
+        })
+
     }
     render() {
         return (
             <form
                 noValidate autoComplete="off"
-                className="add-item-form">
+                className="add-item-form"
+                onSubmit={this.onSubmit}>
                 <TextField
                     id="standard-name"
                     label="Item Name"
                     className="form-field"
+                    value={this.state.item_name}
+                    onChange={this.itemNameAdded}
                 />
                 <TextField
                     id="standard-number"
