@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import "../App.css";
+import "../assets/App.css";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
@@ -54,7 +54,7 @@ export default class CreateTodo extends Component {
         this.setState({
             item_name: '',
             item_owner: '',
-            max_budget: undefined
+            max_budget: ''
         })
 
     }
@@ -76,6 +76,8 @@ export default class CreateTodo extends Component {
                     label="Max Budget"
                     type="number"
                     className="form-field"
+                    value={this.state.max_budget}
+                    onChange={this.maxBudgetAdded}
                 />
                 <FormControl className="form-field">
                     <FormLabel component="legend">Owner</FormLabel>
@@ -83,6 +85,8 @@ export default class CreateTodo extends Component {
                         aria-label="Owner"
                         name="gender1"
                         className="group"
+                        value={this.state.item_owner}
+                        onChange={this.itemOwnerAdded}
                     >
                         <FormControlLabel value="Mom" control={<Radio />} label="Mom" />
                         <FormControlLabel value="Dad" control={<Radio />} label="Dad" />
@@ -92,8 +96,8 @@ export default class CreateTodo extends Component {
 
                 <Button variant="contained"
                     color="primary"
-                    className="add-item-button">
-                    Add Item
+                    className="add-item-button"
+                    type="submit">
                 </Button>
             </form>
         )

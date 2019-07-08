@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import 'typeface-roboto';
 import Container from '@material-ui/core/Container';
-import "./App.css";
+import "./assets/App.css";
 import CreateItem from "./components/CreateItem";
 import EditItem from "./components/EditItem";
 import ItemList from "./components/ItemList";
