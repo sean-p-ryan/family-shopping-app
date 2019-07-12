@@ -4,19 +4,21 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const itemRoutes = express.Router();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
+require('dotenv').config();
 
 // imports to serve React app with Express 
 const path = require('path');
 
-let Item = require('./db/models/item_models')
+let Item = require('./models/item_models')
 
 app.use(cors());
 app.use(bodyParser.json());
 
+// sends static file requests to client
 app.use(express.static(path.join(__dirname, "client", "build")))
 
-mongoose.connect('mongodb://127.0.0.1:27017/family-shopping', { useNewUrlParser: true });
+mongoose.connect(process.env.DEVELOPMENT_DATABASE, { useNewUrlParser: true });
 const connection = mongoose.connection;
 
 connection.once('open', function() {
@@ -80,6 +82,11 @@ itemRoutes.route('/update/:id').post((req, res) => {
 })
 
 app.use('/', itemRoutes)
+
+// sends index.html back to client is request was not recognized
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
