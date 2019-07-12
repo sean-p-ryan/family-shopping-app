@@ -45,6 +45,24 @@ h2 {
   border-bottom: 5px solid #ffffff;
 }
 
+/* DISPLAY TODOS */
+
+/* table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+th {
+  margin-right: 10%;
+} */
+
+.MuiBox-root .MuiBox-root-59 {
+  padding: 0;
+}
+
+
+
 /* CREATE ITEM */
 
 .add-item-form {

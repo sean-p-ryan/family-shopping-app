@@ -7,6 +7,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import axios from 'axios';
 
 
 export default class CreateTodo extends Component {
@@ -50,6 +51,15 @@ export default class CreateTodo extends Component {
         console.log(`Item name: ${this.state.item_name}`);
         console.log(`Item owner: ${this.state.item_owner}`);
         console.log(`Max budget: ${this.state.max_budget}`)
+
+        const newItem = {
+            item_name: this.state.item_name,
+            item_max_budget: this.state.item_max_budget,
+            item_owner: this.state.item_owner            
+        }
+
+        axios.post('http://localhost:4000/create', newItem)
+            .then(res => console.log("Here's the new item" + res.data));
 
         this.setState({
             item_name: '',

@@ -28,9 +28,9 @@ class App extends Component {
           <Route path="/" exact component={ItemList} />
           <Route path="/edit/:id" component={EditItem} />
           <Route path="/create" component={CreateItem} />
-        </Container >
+        </Container >        
       </Router>
-      </div>
+      </div>      
     );
   }
 }
