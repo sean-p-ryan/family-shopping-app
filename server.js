@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const itemRoutes = express.Router();
-const PORT = 5000;
+const PORT = 4000;
 
 // imports to serve React app with Express 
 const path = require('path');

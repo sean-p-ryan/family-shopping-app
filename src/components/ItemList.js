@@ -6,18 +6,16 @@ import axios from 'axios';
 
 // functional component to render each item
 const Item = props => (
-    <Box bgcolor="primary.main" style={{ backgroundColor: '#cfe8fc' }} p={2} m={1}>
-        <tr>
-            <td>{props.item.item_name}</td>
-            <td>{props.item.item_max_budget}</td>
-            <td>{props.item.item_owner}</td>
-            <td>
-                <Router>
-                    <Link to={"/update/" + props.item._id}>Edit</Link>
-                </Router>
-            </td>
-        </tr>
-    </Box>
+    <tr>
+        <td>{props.item.item_name}</td>
+        <td>{props.item.item_max_budget}</td>
+        <td>{props.item.item_owner}</td>
+        <td>
+            <Router>
+                <Link to={"/update/" + props.item._id}>Edit</Link>
+            </Router>
+        </td>
+    </tr>
 )
 
 
@@ -50,7 +48,17 @@ export default class ItemList extends Component {
     render() {
         return (
             <Typography component="div" variant="body1">
-                {this.itemList()}
+                <table>
+                    <tr bgcolor="primary.main" style={{ backgroundColor: '#cfe8fc' }}>
+                        <th>Item name</th>
+                        <th>Max budget</th>
+                        <th>Responsible</th>
+                        <th>Edit item</th>
+                    </tr>
+                    {this.itemList()}
+                </table>
+
+
             </Typography>
         )
     }

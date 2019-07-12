@@ -17,7 +17,7 @@ export default class CreateTodo extends Component {
         this.state = {
             item_name: '',
             item_owner: '',
-            max_budget: undefined
+            max_budget: ''
         };
 
         this.itemNameAdded = this.itemNameAdded.bind(this);
@@ -34,7 +34,7 @@ export default class CreateTodo extends Component {
 
     maxBudgetAdded = (e) => {
         this.setState({
-            max_budget: e.target.value
+            item_max_budget: e.target.value
         })
     };
 
@@ -50,7 +50,7 @@ export default class CreateTodo extends Component {
         console.log(`Form submitted`);
         console.log(`Item name: ${this.state.item_name}`);
         console.log(`Item owner: ${this.state.item_owner}`);
-        console.log(`Max budget: ${this.state.max_budget}`)
+        console.log(`Max budget: ${this.state.item_max_budget}`)
 
         const newItem = {
             item_name: this.state.item_name,
@@ -64,7 +64,7 @@ export default class CreateTodo extends Component {
         this.setState({
             item_name: '',
             item_owner: '',
-            max_budget: ''
+            item_max_budget: ''
         })
 
     }
@@ -86,7 +86,7 @@ export default class CreateTodo extends Component {
                     label="Max Budget"
                     type="number"
                     className="form-field"
-                    value={this.state.max_budget}
+                    value={this.state.item_max_budget}
                     onChange={this.maxBudgetAdded}
                 />
                 <FormControl className="form-field">
