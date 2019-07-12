@@ -4,21 +4,20 @@ import Typography from '@material-ui/core/Typography';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 
+// functional component to render each item
 const Item = props => (
-
     <Box bgcolor="primary.main" style={{ backgroundColor: '#cfe8fc' }} p={2} m={1}>
-                        <tr>
-        <td>{props.item.item_name}</td>
-        <td>{props.item.item_max_budget}</td>
-        <td>{props.item.item_owner}</td>
-        <td>
-            <Router>
-                <Link to={"/update/" + props.item._id}>Edit</Link>
-            </Router>
-        </td>
-    </tr>
+        <tr>
+            <td>{props.item.item_name}</td>
+            <td>{props.item.item_max_budget}</td>
+            <td>{props.item.item_owner}</td>
+            <td>
+                <Router>
+                    <Link to={"/update/" + props.item._id}>Edit</Link>
+                </Router>
+            </td>
+        </tr>
     </Box>
-
 )
 
 
@@ -51,7 +50,7 @@ export default class ItemList extends Component {
     render() {
         return (
             <Typography component="div" variant="body1">
-            {this.itemList()}
+                {this.itemList()}
             </Typography>
         )
     }
