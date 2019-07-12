@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const itemRoutes = express.Router();
 const PORT = 4000;
 
-let Item = require('../db/models/item_models')
+let Item = require('./db/models/item_models')
 
 app.use(cors());
 app.use(bodyParser.json());
