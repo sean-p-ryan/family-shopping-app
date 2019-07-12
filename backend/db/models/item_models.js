@@ -6,7 +6,7 @@ let Item = new Schema({
         type: String
     },
     item_max_budget: {
-        type: String
+        type: Number
     },
     item_owner: {
         type: String

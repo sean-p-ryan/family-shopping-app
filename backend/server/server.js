@@ -15,29 +15,64 @@ mongoose.connect('mongodb://127.0.0.1:27017/family-shopping', { useNewUrlParser:
 const connection = mongoose.connection;
 
 connection.once('open', function() {
-    console.log("MongoDB database connection established successfully");
+    console.log("DB connection is now open.");
 });
 
+// show all todos on index 
 itemRoutes.route('/').get(function (req, res) {    
     Item.find(function (err, items) {
         if (err) {
             console.log(err);
-        } else {
+        } else if (!items) {
+            console.log("No items were found.")            
+        }        
+        else {
             res.json(items);
         }
     });
 });
 
-itemRoutes.route('/create').get(function(req, res) {    
+// retrieve an item by ID
+itemRoutes.route('/:id').get(function(req, res) {
+    let id = req.params.id;
+    Item.findById(id, (err, item) => {
+        res.json(item)
+    });
+});
+
+// adds a new item to the database
+itemRoutes.route('/create').post(function(req, res) {    
+    console.log(req.body)
     let item = new Item(req.body);
+    console.log("Here's the item" + item)
     item.save()
         .then(item => {
-            res.status(200).json({'item': 'item added successfully'});
+            console.log(item)
+            res.status(200).json("You added an item!");
         })
         .catch(err => {
-            res.status(400).send('failed to add new item');
+            res.send('failed to add new item');
         });
 });
+
+// update an item in the database
+itemRoutes.route('/update/:id').post((req, res) => {
+    Item.findById(req.params.id, function(err, item) {
+        if (!item){
+            res.status.send("This item was not found.")
+        } else {
+            let item = new Item(req.body);
+            console.log("Here's the item!@" + item)
+            item.save()
+                .then(item => {
+                    res.send("This item has been updated.");
+                })
+                .catch(err => {
+                    res.send("It was not possible to update this item.")
+                }); 
+        }
+    })
+})
 
 app.use('/', itemRoutes)
 
