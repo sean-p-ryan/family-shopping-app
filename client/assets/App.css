@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap');
+
+/* GLOBAL STYLES */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Libre Baskerville', serif;
+}
+
+.content-wrapper {
+  height: 100vh;  
+}
+
+.main-container{
+  background-color:  #F5F5F5;
+  height: 100vh;
+}
+
+h2 {
+  text-align: center;
+}
+
+.button {
+  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)';
+  border: 0;
+  border-radius: 3;
+  box-shadow: '0 3px 5px 2px rgba(255, 105, 135, .3)';
+  color: 'white';
+  height: 48;
+  padding: '0 30px';
+}
+
+/* NAV BAR */
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.selected-view {
+  border-bottom: 5px solid #ffffff;
+}
+
+/* DISPLAY TODOS */
+
+/* table {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+th {
+  margin-right: 10%;
+} */
+
+.MuiBox-root .MuiBox-root-59 {
+  padding: 0;
+}
+
+
+
+/* CREATE ITEM */
+
+.add-item-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 7%;
+}
+
+.form-field {
+  margin-bottom: 15px !important; 
+}
+
