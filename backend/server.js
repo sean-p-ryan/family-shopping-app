@@ -14,7 +14,7 @@ let Item = require('./db/models/item_models')
 app.use(cors());
 app.use(bodyParser.json());
 
-// app.use(express.static(path.join(__dirname, "client", "build")))
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 mongoose.connect('mongodb://127.0.0.1:27017/family-shopping', { useNewUrlParser: true });
 const connection = mongoose.connection;
