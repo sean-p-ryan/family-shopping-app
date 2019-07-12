@@ -4,12 +4,17 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const itemRoutes = express.Router();
-const PORT = 4000;
+const PORT = 5000;
+
+// imports to serve React app with Express 
+const path = require('path');
 
 let Item = require('./db/models/item_models')
 
 app.use(cors());
 app.use(bodyParser.json());
+
+// app.use(express.static(path.join(__dirname, "client", "build")))
 
 mongoose.connect('mongodb://127.0.0.1:27017/family-shopping', { useNewUrlParser: true });
 const connection = mongoose.connection;
