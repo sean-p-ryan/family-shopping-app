@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import axios from 'axios';
 
 // functional component to render each item
@@ -38,7 +37,7 @@ export default class ItemList extends Component {
 
     // Iterate through item list outputting "Item" component for each one
     itemList() {
-        return this.state.items.map((currentItem, i) => {
+        return this.state.items.map(function(currentItem, i){
             if (currentItem.item_name) {
                 return <Item item={currentItem} key={i} />
             }

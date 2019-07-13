@@ -7,15 +7,7 @@
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.2.0",
-    "axios": "^0.19.0",
-    "body-parser": "^1.19.0",
-    "bootstrap": "^4.3.1",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
     "material-icons": "^0.3.1",
-    "mongodb": "^3.2.7",
-    "mongoose": "^5.6.4",
-    "nodemon": "^1.19.1",
     "parseurl": "^1.3.3",
     "path": "^0.12.7",
     "react": "^16.8.6",
@@ -47,5 +39,6 @@
   },
   "devDependencies": {
     "jasmine": "^3.4.0"
-  }
+  },
+  "proxy": "http://localhost:8000"
 }
