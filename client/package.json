@@ -2,6 +2,7 @@
   "name": "family-shopping-app",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
   "dependencies": {
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
@@ -46,6 +47,5 @@
   },
   "devDependencies": {
     "jasmine": "^3.4.0"
-  },
-  "proxy": "http://localhost:8000"
+  }
 }
