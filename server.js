@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 // sends static file requests to client
 app.use(express.static(path.join(__dirname, "client", "build")))
 
-mongoose.connect(process.env.DEVELOPMENT_DATABASE, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/family-shopping" || { useNewUrlParser: true });
 const connection = mongoose.connection;
 
 connection.once('open', function() {

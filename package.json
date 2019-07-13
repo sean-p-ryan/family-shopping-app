@@ -3,32 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.2.0",
-    "@material-ui/icons": "^4.2.1",
-    "@material-ui/styles": "^4.2.0",
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
-    "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "material-icons": "^0.3.1",
     "mongodb": "^3.2.7",
     "mongoose": "^5.6.4",
     "nodemon": "^1.19.1",
     "parseurl": "^1.3.3",
-    "path": "^0.12.7",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "typeface-roboto": "0.0.54"
+    "path": "^0.12.7"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+    "start": "node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,7 +33,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "jasmine": "^3.4.0"
+  "engines": {
+    "node": "8.9.2"
   }
 }
