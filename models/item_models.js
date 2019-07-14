@@ -13,4 +13,6 @@ let Item = new Schema({
     }
 });
 
+Item.add({ purchased: 'boolean' });
+
 module.exports = mongoose.model('Item', Item);
