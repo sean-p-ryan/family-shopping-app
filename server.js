@@ -21,6 +21,8 @@ app.use(express.static(path.join(__dirname, "client", "build")))
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/family-shopping" || { useNewUrlParser: true });
 const connection = mongoose.connection;
 
+mongoose.set('useFindAndModify', false);
+
 connection.once('open', function() {
     console.log("DB connection is now open.");
 });
@@ -63,22 +65,20 @@ itemRoutes.route('/create').post(function(req, res) {
 });
 
 // update an item in the database
-itemRoutes.route('/update/:id').post((req, res) => {
-    Item.findById(req.params.id, function(err, item) {
-        if (!item){
+itemRoutes.route('/update/:id').put((req, res) => {
+    const updatedItem = {
+        "item_name": req.body.item_name,
+        "item_max_budget": req.body.item_max_budget,
+        "item_owner": req.body.item_owner,
+        "purchased": req.body.purchased
+    }
+    Item.findByIdAndUpdate(req.params.id, updatedItem, function(err, item) {
+        if(!item){
             res.status.send("This item was not found.")
         } else {
-            let item = new Item(req.body);
-            console.log("Here's the item!@" + item)
-            item.save()
-                .then(item => {
-                    res.send("This item has been updated.");
-                })
-                .catch(err => {
-                    res.send("It was not possible to update this item.")
-                }); 
+            console.log("This item was updated.")
         }
-    })
+    });
 })
 
 app.use('/', itemRoutes)

@@ -23,6 +23,12 @@ export default class EditItem extends Component {
             item_max_budget: '',
             purchased: false
         }
+
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChangeItemName = this.onChangeItemName.bind(this);
+        this.onChangeMaxBudget = this.onChangeMaxBudget.bind(this);
+        this.onChangeItemOwner = this.onChangeItemOwner.bind(this);
+        this.onHandleSwitchChange = this.onHandleSwitchChange.bind(this);
     }
 
     componentDidMount() {
@@ -41,24 +47,46 @@ export default class EditItem extends Component {
             })
     }
 
+    // sent POST request to '../update/:id' endpoint with state data
     onSubmit = (e) => {
+        e.preventDefault();
 
+        const updatedItem = {
+            item_name: this.state.item_name,
+            item_max_budget: this.state.item_max_budget,
+            item_owner: this.state.item_owner,
+            purchased: this.state.purchased
+        };
+
+        axios.put('http://localhost:4000/update/' + this.props.match.params.id, updatedItem)
+            .then(res => console.log("Here's the updated data" + res.data));
+
+        // redirects user back to default route
+        this.props.history.push('/');
     }
 
-    changeItemName = () => {
-
+    onChangeItemName = (e) => {
+        this.setState({
+            item_name: e.target.value
+        })
     }
 
-    changeMaxBudget = () => {
-
+    onChangeMaxBudget = (e) => {
+        this.setState({
+            item_max_budget: e.target.value
+        })
     }
 
-    changeItemOwner = () => {
-
+    onChangeItemOwner = (e) => {
+        this.setState({
+            item_owner: e.target.value
+        })
     }
 
-    handleSwitchChange = (e) => {
-
+    onHandleSwitchChange = (e) => {
+        this.setState({
+            purchased: e.target.value
+        })
     }
 
     render() {
@@ -75,7 +103,7 @@ export default class EditItem extends Component {
                         placeholder={this.state.item_name}
                         className="form-field"
                         value={this.state.item_name}
-                        onChange={this.changeItemName}
+                        onChange={this.onChangeItemName}
                     />
                     <TextField
                         id="standard-number"
@@ -83,7 +111,7 @@ export default class EditItem extends Component {
                         type="number"
                         className="form-field"
                         value={this.state.item_max_budget}
-                        onChange={this.changeMaxBudget}
+                        onChange={this.onChangeMaxBudget}
                     />
                     <FormControl className="form-field">
                         <FormLabel component="legend">Owner</FormLabel>
@@ -92,7 +120,7 @@ export default class EditItem extends Component {
                             name="gender1"
                             className="group"
                             value={this.state.item_owner}
-                            onChange={this.changeItemOwner}
+                            onChange={this.onChangeItemOwner}
                         >
                             <FormControlLabel value="Mom" control={<Radio />} label="Mom" />
                             <FormControlLabel value="Dad" control={<Radio />} label="Dad" />
@@ -102,8 +130,8 @@ export default class EditItem extends Component {
                     <div>
                         Mark As Purchased
                     <Switch
-                        onChange={this.handleSwitchChange}
-                        value={false}
+                        onChange={this.onHandleSwitchChange}
+                        value={this.state.purchased}
                         inputProps="Purchased"
                     />
                     </div>
