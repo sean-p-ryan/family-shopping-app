@@ -29,6 +29,7 @@ export default class EditItem extends Component {
         this.onChangeMaxBudget = this.onChangeMaxBudget.bind(this);
         this.onChangeItemOwner = this.onChangeItemOwner.bind(this);
         this.onHandleSwitchChange = this.onHandleSwitchChange.bind(this);
+        this.renderPurchasedButtonText = this.renderPurchasedButtonText.bind(this);
     }
 
     componentDidMount() {
@@ -84,9 +85,26 @@ export default class EditItem extends Component {
     }
 
     onHandleSwitchChange = (e) => {
-        this.setState({
-            purchased: e.target.value
-        })
+        (!this.state.purchased) ?
+            this.setState({
+                purchased: true
+            })
+            :
+            this.setState({
+                purchased: false
+            })
+    }
+
+    renderPurchasedButtonText = () => {
+        return (!this.state.purchased) ?
+            "Unmark as purchased"
+            :
+            "Mark as purchased"
+    }
+
+    deleteItem = () => {
+        axios.delete('http://localhost:4000/update/' + this.props.match.params.id)
+            .then(console.log("This item has been deleted."));
     }
 
     render() {
@@ -128,12 +146,15 @@ export default class EditItem extends Component {
                         </RadioGroup>
                     </FormControl>
                     <div>
-                        Mark As Purchased
-                    <Switch
-                        onChange={this.onHandleSwitchChange}
-                        value={this.state.purchased}
-                        inputProps="Purchased"
-                    />
+                        <span>
+                            {this.renderPurchasedButtonText()}
+                        </span>
+                        <Switch
+                            onChange={this.onHandleSwitchChange}
+                            value={this.state.purchased}
+                            inputProps="Purchased"
+                            checked={this.state.purchased}
+                        />
                     </div>
                     <Button variant="contained"
                         color="primary"
@@ -141,6 +162,12 @@ export default class EditItem extends Component {
                         type="submit">
                     </Button>
                 </form>
+                <Button variant="contained"
+                    color="primary"
+                    className="add-item-button"
+                    type="delete"
+                    onClick={this.deleteItem}>
+                </Button>
             </div>
         )
     }

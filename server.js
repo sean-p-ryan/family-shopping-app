@@ -79,7 +79,14 @@ itemRoutes.route('/update/:id').put((req, res) => {
             console.log("This item was updated.")
         }
     });
-})
+});
+
+// delete an item in the database
+itemRoutes.route('/update/:id').delete((req, res) => {
+    console.log("In delete route")
+    Item.findByIdAndDelete({ "_id": req.params.id});
+    console.log("This item has been deleted");
+});
 
 app.use('/', itemRoutes)
 

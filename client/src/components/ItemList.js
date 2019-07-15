@@ -11,7 +11,7 @@ const Item = props => (
         <td>{props.item.item_name}</td>
         <td>{props.item.item_max_budget}</td>
         <td>{props.item.item_owner}</td>
-        <td>{props.item.purchased}</td>
+        <td>{(props.item.purchased) ? `True` : `False`}</td>
         <td>
             <Link to={"/update/" + props.item._id}>Edit</Link>
         </td>
