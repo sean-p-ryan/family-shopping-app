@@ -17,12 +17,15 @@ export default class CreateTodo extends Component {
         this.state = {
             item_name: '',
             item_owner: '',
-            max_budget: ''
+            item_max_budget: '',
+            purchased: false
         };
 
+        // change context of 'this' in component methods to constructor
         this.itemNameAdded = this.itemNameAdded.bind(this);
         this.maxBudgetAdded = this.maxBudgetAdded.bind(this);
         this.itemOwnerAdded = this.itemOwnerAdded.bind(this);
+        this.itemPurchased = this.itemPurchased.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -43,8 +46,20 @@ export default class CreateTodo extends Component {
             item_owner: e.target.value
         });
     };
+    
+    itemPurchased = () => {
+        (!this.state.purchased) ?
+        this.setState({
+            purchased: true
+        })
+        :
+        this.setState({
+            purchased: false
+        })
+    }
 
     onSubmit = e => {
+        // stops immediate POST request
         e.preventDefault();
 
         console.log(`Form submitted`);
@@ -55,19 +70,23 @@ export default class CreateTodo extends Component {
         const newItem = {
             item_name: this.state.item_name,
             item_max_budget: this.state.item_max_budget,
-            item_owner: this.state.item_owner            
+            item_owner: this.state.item_owner,
+            purchased: this.state.purchased            
         }
 
+        // sends newItem object to 'create' endpoint as POST request
         axios.post('http://localhost:4000/create', newItem)
             .then(res => console.log("Here's the new item" + res.data));
 
         this.setState({
             item_name: '',
             item_owner: '',
-            item_max_budget: ''
+            item_max_budget: '',
+            purchased: false
         })
 
     }
+    
     render() {
         return (
             <form

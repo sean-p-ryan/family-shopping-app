@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import axios from 'axios';
+import EditItem from './EditItem';
+
 
 // functional component to render each item
 const Item = props => (
@@ -9,14 +11,12 @@ const Item = props => (
         <td>{props.item.item_name}</td>
         <td>{props.item.item_max_budget}</td>
         <td>{props.item.item_owner}</td>
+        <td>{props.item.purchased}</td>
         <td>
-            <Router>
-                <Link to={"/update/" + props.item._id}>Edit</Link>
-            </Router>
+            <Link to={"/update/" + props.item._id}>Edit</Link>
         </td>
     </tr>
 )
-
 
 export default class ItemList extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ export default class ItemList extends Component {
         axios.get('http://localhost:4000/')
             .then(res => {
                 this.setState({ items: res.data });
-                console.log("here are the items" + this.state.items)
+                // console.log(this.state.items.map(item => item.purchased))              
             })
             .catch(function (err) {
                 console.log(err);
@@ -37,10 +37,8 @@ export default class ItemList extends Component {
 
     // Iterate through item list outputting "Item" component for each one
     itemList() {
-        return this.state.items.map(function(currentItem, i){
-            if (currentItem.item_name) {
-                return <Item item={currentItem} key={i} />
-            }
+        return this.state.items.reverse().map(function (currentItem, i) {
+            return <Item item={currentItem} key={i} />
         })
     }
 
@@ -52,12 +50,11 @@ export default class ItemList extends Component {
                         <th>Item name</th>
                         <th>Max budget</th>
                         <th>Responsible</th>
+                        <th>Purchased</th>
                         <th>Edit item</th>
                     </tr>
                     {this.itemList()}
                 </table>
-
-
             </Typography>
         )
     }
