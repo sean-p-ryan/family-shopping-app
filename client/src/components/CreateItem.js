@@ -75,8 +75,7 @@ export default class CreateTodo extends Component {
         }
 
         // sends newItem object to 'create' endpoint as POST request
-        axios.post(process.env.BASE_URL + this.props.match.params.id 
-            || 'http://localhost:4000/create' + this.props.match.params.id, newItem)
+        axios.post('http://localhost:4000/create', newItem)
             .then(res => console.log("Here's the new item" + res.data));
 
         this.setState({

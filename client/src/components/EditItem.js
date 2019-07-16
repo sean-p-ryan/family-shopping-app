@@ -33,8 +33,7 @@ export default class EditItem extends Component {
     }
 
     componentDidMount() {
-        axios.get(process.env.BASE_URL + this.props.match.params.id 
-                || 'http://localhost:4000/' + this.props.match.params.id)
+        axios.get('http://localhost:4000/' + this.props.match.params.id)
             .then(res => {
                 console.log("here's the data" + res.data.item_name)
                 this.setState({
@@ -60,8 +59,7 @@ export default class EditItem extends Component {
             purchased: this.state.purchased
         };
 
-        axios.put(process.env.BASE_URL + this.props.match.params.id
-                || 'http://localhost:4000/update/' + this.props.match.params.id, updatedItem)
+        axios.put('http://localhost:4000/update/' + this.props.match.params.id, updatedItem)
             .then(res => console.log("Here's the updated data" + res.data));
 
         // redirects user back to default route
@@ -105,8 +103,7 @@ export default class EditItem extends Component {
     }
 
     deleteItem = () => {
-        axios.delete(process.env.MONGODB_URI + this.props.match.params.id 
-            || 'http://localhost:4000/update/' + this.props.match.params.id)
+        axios.delete('http://localhost:4000/update/' + this.props.match.params.id)
             .then(console.log("This item has been deleted."));
     }
 

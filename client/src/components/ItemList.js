@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import axios from 'axios';
-import EditItem from './EditItem';
 
 
 // functional component to render each item
@@ -25,10 +24,10 @@ export default class ItemList extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://family-shopping-app.herokuapp.com/' || 'http://localhost:4000/')
+        axios.get('http://localhost:4000/')
             .then(res => {
-                this.setState({ items: res.data });
-                // console.log(this.state.items.map(item => item.purchased))              
+                this.setState({ items: res.data });       
+                console.log(this.state.items)         
             })
             .catch(function (err) {
                 console.log(err);
@@ -37,7 +36,7 @@ export default class ItemList extends Component {
 
     // Iterate through item list outputting "Item" component for each one
     itemList() {
-        return this.state.items.reverse().map(function (currentItem, i) {
+        return this.state.items.map(function (currentItem, i) {
             return <Item item={currentItem} key={i} />
         })
     }
@@ -45,7 +44,6 @@ export default class ItemList extends Component {
     render() {
         return (
             <Typography component="div" variant="body1">
-                <table>
                     <tr bgcolor="primary.main" style={{ backgroundColor: '#cfe8fc' }}>
                         <th>Item name</th>
                         <th>Max budget</th>
@@ -54,7 +52,6 @@ export default class ItemList extends Component {
                         <th>Edit item</th>
                     </tr>
                     {this.itemList()}
-                </table>
             </Typography>
         )
     }
