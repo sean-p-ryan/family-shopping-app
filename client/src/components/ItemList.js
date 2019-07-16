@@ -27,14 +27,9 @@ export default class ItemList extends Component {
 
     componentDidMount() {
         console.log("this mount this.state: ", this.itemList())
-        axios.get('https://family-shopping-app.herokuapp.com/')
+        axios.get('https://family-shopping-app.herokuapp.com/' || 'http://localhost:4000')
             .then(res => {
-                if (typeof res.data === "string") {
-                    axios.get('http://localhost:4000')
-                        .then(res => {
-                            this.setState({ items: res.data });
-                        })
-                }
+                this.setState({ items: "here" });
             })
             .catch(function (err) {
                 console.log(err);
