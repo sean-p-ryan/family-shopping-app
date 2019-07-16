@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 // sends static file requests to client
 app.use(express.static(path.join(__dirname, "client", "build")))
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/family-shopping")
 const connection = mongoose.connection;
 
 connection.once('open', function() {

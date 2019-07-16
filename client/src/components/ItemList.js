@@ -10,7 +10,7 @@ const Item = props => (
         <td>{props.item.item_name}</td>
         <td>{props.item.item_max_budget}</td>
         <td>{props.item.item_owner}</td>
-        <td>{(props.item.purchased) ? `True` : `False`}</td>
+        <td>{props.item.purchased}</td>
         <td>
             <Link to={"/update/" + props.item._id}>Edit</Link>
         </td>
@@ -21,10 +21,13 @@ export default class ItemList extends Component {
     constructor(props) {
         super(props);
         this.state = { items: [] };
+
+        this.itemList = this.itemList.bind(this);
     }
 
     componentDidMount() {
-        axios.get('https://family-shopping-app.herokuapp.com/')
+        console.log("this mount this.state: ", this.itemList())
+        axios.get('https://family-shopping-app.herokuapp.com/update/' || 'https://localhost:4000/')
             .then(res => {
                 this.setState({ items: res.data });       
                 console.log(this.state.items)         
@@ -34,11 +37,17 @@ export default class ItemList extends Component {
             })
     }
 
+    componentDidUpdate() {
+        console.log("updated this.state: ", this.itemList());
+    }
+
     // Iterate through item list outputting "Item" component for each one
     itemList() {
-        return this.state.items.map(function (currentItem, i) {
-            return <Item item={currentItem} key={i} />
-        })
+        console.log(this.state)
+        // return this.state.items.map(function (currentItem, i) {
+        //     return <Item item={currentItem} key={i} />
+        // });
+
     }
 
     render() {
@@ -49,9 +58,9 @@ export default class ItemList extends Component {
                         <th>Max budget</th>
                         <th>Responsible</th>
                         <th>Purchased</th>
-                        <th>Edit item</th>
+                        <th>Edit</th>
                     </tr>
-                    {this.itemList()}
+                    {/* {this.itemList()} */}
             </Typography>
         )
     }
