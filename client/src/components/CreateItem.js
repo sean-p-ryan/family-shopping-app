@@ -75,7 +75,7 @@ export default class CreateTodo extends Component {
         }
 
         // sends newItem object to 'create' endpoint as POST request
-        axios.post('http://localhost:4000/create', newItem)
+        axios.post('https://family-shopping-app.herokuapp.com/create', newItem)
             .then(res => console.log("Here's the new item" + res.data));
 
         this.setState({
