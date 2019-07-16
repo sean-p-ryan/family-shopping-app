@@ -35,6 +35,7 @@ export default class EditItem extends Component {
     componentDidMount() {
         axios.get('https://family-shopping-app.herokuapp.com/api/update/' + this.props.match.params.id)
             .then(res => {
+                console.log(this.props.match.params.id)
                 console.log("here's the data" + res.data.item_name)
                 this.setState({
                     item_name: res.data.item_name,
@@ -46,9 +47,9 @@ export default class EditItem extends Component {
             .catch(function (error) {
                 console.log(error);
             })
+            console.log("HERE'S THE ITEM WE WANT TO EDIT" + this.state.item_name)
     }
 
-    // sent POST request to '../update/:id' endpoint with state data
     onSubmit = (e) => {
         e.preventDefault();
 
@@ -110,7 +111,7 @@ export default class EditItem extends Component {
     render() {
         return (
             <div>
-                <h1>Update This Item</h1>
+                <h3>Update This Item</h3>
 
                 <form
                     noValidate autoComplete="off"

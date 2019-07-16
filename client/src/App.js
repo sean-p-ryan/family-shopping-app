@@ -28,6 +28,7 @@ class App extends Component {
             <Route path="/" exact component={ItemList} />
             <Route path="/update/:id" component={EditItem} />
             <Route path="/create" component={CreateItem} />
+            {this.props.children}
           </Container >
         </Router>
       </div>

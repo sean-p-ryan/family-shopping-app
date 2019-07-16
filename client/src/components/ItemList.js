@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Typography from '@material-ui/core/Typography';
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios';
-require('dotenv').config();
+import EditItem from "./EditItem";
+
 
 
 // functional component to render each item
@@ -13,7 +14,7 @@ const Item = props => (
         <td>{props.item.item_owner}</td>
         <td>{props.item.purchased}</td>
         <td>
-            <Link to={"/update/" + props.item._id}>Edit</Link>
+            <Link to={`/update/${props.item._id}`} component={EditItem}>Edit</Link>
         </td>
     </tr>
 )
@@ -39,34 +40,34 @@ export default class ItemList extends Component {
             })
     }
 
-        // componentDidUpdate() {
-        //     console.log("updated this.state: ", this.itemList());
-        // }
+    // componentDidUpdate() {
+    //     console.log("updated this.state: ", this.itemList());
+    // }
 
-        // Iterate through item list outputting "Item" component for each one
-        itemList() {
-            console.log(this.state)
-            return this.state.items.map(function (currentItem, i) {
-                return <Item item={currentItem} key={i} />
-            });
-        }
-
-        render() {
-            return (
-                <Typography component="div" variant="body1">
-                    <table>
-                        <tbody>
-                            <tr bgcolor="primary.main" style={{ backgroundColor: '#cfe8fc' }}>
-                                <th>Item name</th>
-                                <th>Max budget</th>
-                                <th>Responsible</th>
-                                <th>Purchased</th>
-                                <th>Edit</th>
-                            </tr>
-                            {this.itemList()}
-                        </tbody>
-                    </table>
-                </Typography>
-            )
-        }
+    // Iterate through item list outputting "Item" component for each one
+    itemList() {
+        console.log(this.state)
+        return this.state.items.map(function (currentItem, i) {
+            return <Item item={currentItem} key={i} />
+        });
     }
+
+    render() {
+        return (
+            <Typography component="div" variant="body1">
+                <table>
+                    <tbody>
+                        <tr bgcolor="primary.main" style={{ backgroundColor: '#cfe8fc' }}>
+                            <th>Item name</th>
+                            <th>Max budget</th>
+                            <th>Responsible</th>
+                            <th>Purchased</th>
+                            <th>Edit</th>
+                        </tr>
+                        {this.itemList()}
+                    </tbody>
+                </table>
+            </Typography>
+        )
+    }
+}

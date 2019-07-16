@@ -26,8 +26,7 @@ connection.once('open', function() {
 });
 
 // show all todos on index 
-itemRoutes.route('/').get(function (req, res) {    
-    console.log("GET REQUEST MADE")
+itemRoutes.route('/').get(function (req, res) {
     Item.find(function (err, items) {
         if (err) {
             console.log(err);
@@ -41,7 +40,7 @@ itemRoutes.route('/').get(function (req, res) {
 });
 
 // retrieve an item by ID
-itemRoutes.route('/:id').get(function(req, res) {
+itemRoutes.route('/update/:id').get(function(req, res) {
     let id = req.params.id;
     Item.findById(id, (err, item) => {
         res.json(item)
