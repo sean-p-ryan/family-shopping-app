@@ -42,9 +42,9 @@ export default class ItemList extends Component {
             })
     }
 
-    componentDidUpdate() {
-        console.log("updated this.state: ", this.itemList());
-    }
+    // componentDidUpdate() {
+    //     console.log("updated this.state: ", this.itemList());
+    // }
 
     // Iterate through item list outputting "Item" component for each one
     itemList() {
@@ -52,7 +52,6 @@ export default class ItemList extends Component {
         return this.state.items.map(function (currentItem, i) {
             return <Item item={currentItem} key={i} />
         });
-
     }
 
     render() {
