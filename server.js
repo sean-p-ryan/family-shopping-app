@@ -25,7 +25,7 @@ connection.once('open', function() {
     console.log("DB connection is now open.");
 });
 
-// show all todos on index 
+// show all todos on index (WORKING)
 itemRoutes.route('/').get(function (req, res) {
     Item.find(function (err, items) {
         if (err) {
@@ -39,7 +39,7 @@ itemRoutes.route('/').get(function (req, res) {
     });
 });
 
-// retrieve an item by ID
+// retrieve an item by ID (WORKING)
 itemRoutes.route('/update/:id').get(function(req, res) {
     let id = req.params.id;
     Item.findById(id, (err, item) => {
@@ -47,7 +47,7 @@ itemRoutes.route('/update/:id').get(function(req, res) {
     });
 });
 
-// adds a new item to the database
+// adds a new item to the database (WORKING)
 itemRoutes.route('/create').post(function(req, res) {    
     console.log(req.body)
     let item = new Item(req.body);
@@ -64,7 +64,9 @@ itemRoutes.route('/create').post(function(req, res) {
 
 // update an item in the database
 itemRoutes.route('/update/:id').post((req, res) => {
+    console.log("in update route")
     Item.findById(req.params.id, function(err, item) {
+        console.log("red.params.id: " + req.params.id)
         if (!item){
             res.status.send("This item was not found.")
         } else {

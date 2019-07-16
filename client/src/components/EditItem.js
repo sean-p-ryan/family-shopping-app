@@ -33,10 +33,8 @@ export default class EditItem extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://family-shopping-app.herokuapp.com/api/update/' + this.props.match.params.id)
-            .then(res => {
-                console.log(this.props.match.params.id)
-                console.log("here's the data" + res.data.item_name)
+        axios.get('https://family-shopping-app.herokuapp.com/api/update/' + this.props.match.params.id)        
+            .then(res => {                                
                 this.setState({
                     item_name: res.data.item_name,
                     item_owner: res.data.item_owner,
@@ -46,8 +44,7 @@ export default class EditItem extends Component {
             })
             .catch(function (error) {
                 console.log(error);
-            })
-            console.log("HERE'S THE ITEM WE WANT TO EDIT" + this.state.item_name)
+            })            
     }
 
     onSubmit = (e) => {
@@ -60,7 +57,7 @@ export default class EditItem extends Component {
             purchased: this.state.purchased
         };
 
-        axios.put('https://family-shopping-app.herokuapp.com/api/update/' + this.props.match.params.id, updatedItem)
+        axios.post('https://family-shopping-app.herokuapp.com/api/update/' + this.props.match.params.id, updatedItem)
             .then(res => console.log("Here's the updated data" + res.data));
 
         // redirects user back to default route
