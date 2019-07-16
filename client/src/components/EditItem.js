@@ -60,7 +60,7 @@ export default class EditItem extends Component {
             purchased: this.state.purchased
         };
 
-        axios.put(process.env.BASE_URL + this.props.match.params.id, updatedItem
+        axios.put(process.env.BASE_URL + this.props.match.params.id
                 || 'http://localhost:4000/update/' + this.props.match.params.id, updatedItem)
             .then(res => console.log("Here's the updated data" + res.data));
 
