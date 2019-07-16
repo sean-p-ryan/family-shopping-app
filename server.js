@@ -27,6 +27,7 @@ connection.once('open', function() {
 
 // show all todos on index 
 itemRoutes.route('/').get(function (req, res) {    
+    console.log("GET REQUEST MADE")
     Item.find(function (err, items) {
         if (err) {
             console.log(err);
