@@ -14,7 +14,7 @@ const Item = props => (
         <td>{props.item.item_owner}</td>
         <td>{props.item.purchased}</td>
         <td>
-            <Link to={`/update/${props.item._id}`} component={EditItem}>Edit</Link>
+            <Link to={`/edit/${props.item._id}`} component={EditItem}>Edit</Link>
         </td>
     </tr>
 )
@@ -28,10 +28,12 @@ export default class ItemList extends Component {
     }
 
     componentDidMount() {
-        console.log("this mount this.state: ", this.itemList())
+        this.getAllItems();        
+    }
+
+    getAllItems = () => {        
         axios.get("https://family-shopping-app.herokuapp.com/api")
             .then(res => {
-                console.log('res.data ', res.data);
                 this.setState({ items: res.data });
             })
             .catch(function (err) {
@@ -39,10 +41,6 @@ export default class ItemList extends Component {
                 console.log('no go');
             })
     }
-
-    // componentDidUpdate() {
-    //     console.log("updated this.state: ", this.itemList());
-    // }
 
     // Iterate through item list outputting "Item" component for each one
     itemList() {

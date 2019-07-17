@@ -10,7 +10,8 @@ let Item = new Schema({
     },
     item_owner: {
         type: String
-    }
+    },
+    _id: false 
 });
 
 Item.add({ purchased: 'boolean' });

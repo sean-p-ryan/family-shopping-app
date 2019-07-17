@@ -3,8 +3,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const mongo = require('mongodb').MongoClient;
+const objectId = require('mongodb').ObjectID;
 const itemRoutes = express.Router();
 const PORT = process.env.PORT || 4000;
+const methodOverride = require('method-override');
 require('dotenv').config();
 
 // imports to serve React app with Express 
@@ -14,6 +17,7 @@ let Item = require('./models/item_models')
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(methodOverride('X-HTTP-Method-Override'));
 
 // sends static file requests to client
 app.use(express.static(path.join(__dirname, "client/build")))
@@ -63,25 +67,23 @@ itemRoutes.route('/create').post(function(req, res) {
 });
 
 // update an item in the database
-itemRoutes.route('/update/:id').post((req, res) => {
-    console.log("in update route")
-    Item.findById(req.params.id, function(err, item) {
-        console.log("red.params.id: " + req.params.id)
-        if (!item){
-            res.status.send("This item was not found.")
-        } else {
-            let item = new Item(req.body);
-            console.log("Here's the item!@" + item)
-            item.save()
-                .then(item => {
-                    res.send("This item has been updated.");
-                })
-                .catch(err => {
-                    res.send("It was not possible to update this item.")
-                }); 
-        }
-    })
-})
+// itemRoutes.route('/edit/:id').post((req, res) => {
+//     console.log("INSIDE UPDATE DB")
+//     let updatedItem = {
+//         item_name: req.body.item_name,
+//         item_max_budget: req.body.item_max_budget,
+//         item_owner: req.body.item_owner,
+//         purchased: req.body.purchased
+//       };
+//     let id = req.body.id;
+
+//     mongo.connect(process.env.MONGODB_URI, function(err, db) {        
+//         db.collection('items').updateOne({"_id": objectId(id)}, {$set: updatedItem}, function(err, result) {
+//             console.log("Item updated");
+//             db.close();
+//         });
+//     });
+// });
 
 app.use('/api', itemRoutes)
 
